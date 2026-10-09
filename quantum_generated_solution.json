@@ -1,0 +1,114 @@
+{
+  "meta": {
+    "title": "Quantum Generated Computation & Flight Optimization Report",
+    "generator": "AeroQ-Route Quantum Engine (Qiskit 2.x + D-Wave Neal)",
+    "timestamp": "2026-10-09T14:45:53.429541",
+    "status": "SUCCESS"
+  },
+  "quantum_arithmetic": {
+    "inputs": {
+      "A": 444,
+      "B": 666,
+      "C": 111
+    },
+    "qubo_optimization": {
+      "formula": "444 + 666 - 111",
+      "target": 999,
+      "quantum_computed_value": 999,
+      "is_exact_ground_state": true,
+      "qubo_ground_energy": 0.0,
+      "qubits_used": 11,
+      "binary_spin_state": "01111100111",
+      "num_reads": 150
+    },
+    "qiskit_circuit_simulation": {
+      "circuit_qubits": 10,
+      "quantum_gate_depth": 2,
+      "measured_state": "1111100111",
+      "measured_integer": 999,
+      "measurement_fidelity": "100.0%",
+      "total_shots": 1024
+    }
+  },
+  "quantum_flight_optimization": {
+    "solver": "Sim Annealer (Neal)",
+    "total_fuel_kg": 75289.6,
+    "co2_emissions_kg": 237915.2,
+    "capacity_violations": 10,
+    "runtime_seconds": 0.0932,
+    "assigned_flight_routes": {
+      "F0": [
+        "DEL",
+        "WP1",
+        "JAI",
+        "BHO",
+        "BOM"
+      ],
+      "F1": [
+        "BOM",
+        "BHO",
+        "JAI",
+        "DEL"
+      ],
+      "F2": [
+        "DEL",
+        "JAI",
+        "BHO",
+        "NAG",
+        "HYD",
+        "BLR"
+      ],
+      "F3": [
+        "BLR",
+        "HYD",
+        "NAG",
+        "BHO",
+        "JAI",
+        "DEL"
+      ],
+      "F4": [
+        "BOM",
+        "WP3",
+        "HYD"
+      ],
+      "F5": [
+        "HYD",
+        "BOM"
+      ],
+      "F6": [
+        "DEL",
+        "JAI",
+        "BHO",
+        "NAG",
+        "VTZ",
+        "MAA"
+      ],
+      "F7": [
+        "CCU",
+        "WP5",
+        "LKO",
+        "DEL"
+      ],
+      "F8": [
+        "BLR",
+        "HYD"
+      ],
+      "F9": [
+        "BOM",
+        "HYD",
+        "NAG",
+        "WP2",
+        "CCU"
+      ]
+    },
+    "quantum_details": {
+      "qubo_energy": -83191.79,
+      "qubo_variables": 20,
+      "conflicts_modeled": 44,
+      "num_reads": 100,
+      "num_sweeps": 500,
+      "samples_evaluated": 25,
+      "method": "D-Wave Neal BQM Metropolis-Hastings Sampling"
+    }
+  }
+}

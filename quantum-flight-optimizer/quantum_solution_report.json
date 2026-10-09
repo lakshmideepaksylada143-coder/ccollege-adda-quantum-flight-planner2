@@ -1,0 +1,231 @@
+{
+  "metadata": {
+    "title": "AeroQ-Route Quantum Flight Optimization Benchmark",
+    "timestamp": "2026-10-09T14:41:13.556728",
+    "flights_count": 10,
+    "seed": 42
+  },
+  "environmental_impact": {
+    "baseline_emissions_kg_co2": 221369.3,
+    "quantum_annealer_emissions_kg_co2": 237915.18,
+    "qaoa_emissions_kg_co2": 240915.21,
+    "co2_delta_kg": -16545.88,
+    "airspace_congestion_reduction": "13 violations -> 10 violations"
+  },
+  "solvers": {
+    "dijkstra": {
+      "fuel_kg": 70053.58,
+      "violations": 13,
+      "runtime_sec": 0.0005,
+      "routes": {
+        "F0": [
+          "DEL",
+          "JAI",
+          "BHO",
+          "BOM"
+        ],
+        "F1": [
+          "BOM",
+          "BHO",
+          "JAI",
+          "DEL"
+        ],
+        "F2": [
+          "DEL",
+          "JAI",
+          "BHO",
+          "NAG",
+          "HYD",
+          "BLR"
+        ],
+        "F3": [
+          "BLR",
+          "HYD",
+          "NAG",
+          "BHO",
+          "JAI",
+          "DEL"
+        ],
+        "F4": [
+          "BOM",
+          "HYD"
+        ],
+        "F5": [
+          "HYD",
+          "BOM"
+        ],
+        "F6": [
+          "DEL",
+          "JAI",
+          "BHO",
+          "NAG",
+          "HYD",
+          "MAA"
+        ],
+        "F7": [
+          "CCU",
+          "WP2",
+          "WP5",
+          "LKO",
+          "DEL"
+        ],
+        "F8": [
+          "BLR",
+          "HYD"
+        ],
+        "F9": [
+          "BOM",
+          "HYD",
+          "NAG",
+          "WP2",
+          "CCU"
+        ]
+      }
+    },
+    "quantum_annealer": {
+      "fuel_kg": 75289.61,
+      "violations": 10,
+      "runtime_sec": 0.0251,
+      "qubo_energy": -83191.79,
+      "qubo_variables": 20,
+      "routes": {
+        "F0": [
+          "DEL",
+          "WP1",
+          "JAI",
+          "BHO",
+          "BOM"
+        ],
+        "F1": [
+          "BOM",
+          "BHO",
+          "JAI",
+          "DEL"
+        ],
+        "F2": [
+          "DEL",
+          "JAI",
+          "BHO",
+          "NAG",
+          "HYD",
+          "BLR"
+        ],
+        "F3": [
+          "BLR",
+          "HYD",
+          "NAG",
+          "BHO",
+          "JAI",
+          "DEL"
+        ],
+        "F4": [
+          "BOM",
+          "WP3",
+          "HYD"
+        ],
+        "F5": [
+          "HYD",
+          "BOM"
+        ],
+        "F6": [
+          "DEL",
+          "JAI",
+          "BHO",
+          "NAG",
+          "VTZ",
+          "MAA"
+        ],
+        "F7": [
+          "CCU",
+          "WP5",
+          "LKO",
+          "DEL"
+        ],
+        "F8": [
+          "BLR",
+          "HYD"
+        ],
+        "F9": [
+          "BOM",
+          "HYD",
+          "NAG",
+          "WP2",
+          "CCU"
+        ]
+      }
+    },
+    "qaoa_gate_based": {
+      "fuel_kg": 76238.99,
+      "violations": 7,
+      "runtime_sec": 0.0122,
+      "ansatz_layers": 2,
+      "qubits": 12,
+      "routes": {
+        "F0": [
+          "DEL",
+          "WP1",
+          "JAI",
+          "BHO",
+          "BOM"
+        ],
+        "F1": [
+          "BOM",
+          "BHO",
+          "JAI",
+          "DEL"
+        ],
+        "F2": [
+          "DEL",
+          "LKO",
+          "WP5",
+          "NAG",
+          "HYD",
+          "BLR"
+        ],
+        "F3": [
+          "BLR",
+          "HYD",
+          "NAG",
+          "WP5",
+          "LKO",
+          "DEL"
+        ],
+        "F4": [
+          "BOM",
+          "HYD"
+        ],
+        "F5": [
+          "HYD",
+          "WP3",
+          "BOM"
+        ],
+        "F6": [
+          "DEL",
+          "JAI",
+          "BHO",
+          "NAG",
+          "HYD",
+          "MAA"
+        ],
+        "F7": [
+          "CCU",
+          "WP2",
+          "WP5",
+          "LKO",
+          "DEL"
+        ],
+        "F8": [
+          "BLR",
+          "HYD"
+        ],
+        "F9": [
+          "BOM",
+          "HYD",
+          "NAG",
+          "WP2",
+          "CCU"
+        ]
+      }
+    }
+  }
+}

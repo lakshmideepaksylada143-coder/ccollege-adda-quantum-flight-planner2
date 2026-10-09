@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AeroQ-Route: Quantum Flight Optimization & Airspace Deconfliction</title>
+  <meta name="description" content="Quantum-assisted air traffic management, multi-aircraft trajectory deconfliction, and carbon emissions reduction platform modeled on Indian airspace corridors.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><text y=%2226%22 font-size=%2226%22>✈️</text></svg>">
+</head>
+<body>
+
+  <!-- Splash Loader -->
+  <div class="splash-screen" id="splashScreen">
+    <div class="splash-content">
+      <div class="splash-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+        </svg>
+      </div>
+      <div class="splash-title">AeroQ-Route</div>
+      <div class="splash-sub">Initializing Quantum Engine...</div>
+      <div class="splash-progress-bar">
+        <div class="splash-progress-fill" id="splashProgressFill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="mainNavbar">
+    <a href="#" class="nav-brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+        </svg>
+      </div>
+      <div>
+        <span class="brand-title">AeroQ-Route</span>
+        <span class="brand-tag">Quantum Engine</span>
+      </div>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#radarSection" class="nav-link active">Live Radar</a></li>
+      <li><a href="#benchmarkSection" class="nav-link">Benchmark Suite</a></li>
+      <li><a href="#pipelineSection" class="nav-link">Pipeline</a></li>
+      <li><a href="#architectureSection" class="nav-link">Architecture</a></li>
+      <li><a href="#sustainabilitySection" class="nav-link">CO₂ Impact</a></li>
+      <li><a href="#scheduleSection" class="nav-link">Flight Schedule</a></li>
+      <li><a href="#mathSection" class="nav-link">Math Models</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <div class="pulse-badge">
+        <span class="pulse-dot"></span>
+        <span>4 Solvers Ready</span>
+      </div>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Overlay Menu -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="mobile-menu-content">
+      <a href="#radarSection" class="mobile-menu-link">Live Radar</a>
+      <a href="#benchmarkSection" class="mobile-menu-link">Benchmark Suite</a>
+      <a href="#pipelineSection" class="mobile-menu-link">Pipeline</a>
+      <a href="#architectureSection" class="mobile-menu-link">Architecture</a>
+      <a href="#sustainabilitySection" class="mobile-menu-link">CO₂ Impact</a>
+      <a href="#scheduleSection" class="mobile-menu-link">Flight Schedule</a>
+      <a href="#mathSection" class="mobile-menu-link">Math Models</a>
+    </div>
+  </div>
+
+  <!-- Hero Section with Particle Background -->
+  <header class="hero">
+    <canvas id="particleCanvas" class="particle-canvas"></canvas>
+    <div class="container hero-inner">
+      <div class="hero-pill animate-on-scroll">
+        <span>🇮🇳 Indian Subcontinent Airspace Corridor Network</span>
+      </div>
+      <h1 class="hero-title animate-on-scroll">
+        Quantum-Assisted <span class="gradient-text-cyan">Air Traffic Deconfliction</span> & <span class="gradient-text-emerald">Fuel Optimization</span>
+      </h1>
+      <p class="hero-subtitle animate-on-scroll">
+        Formulating multi-flight corridor bottlenecks as Quadratic Unconstrained Binary Optimization (QUBO) problems. Benchmarking Classical Heuristics, Exact Branch-and-Bound MILP, Simulated Annealing, and Gate-Based QAOA.
+      </p>
+
+      <!-- Stats Strip -->
+      <div class="hero-stats-strip animate-on-scroll">
+        <div class="stat-chip" data-tooltip="7 Major Indian Airport Hubs + 13 Transit Fix Waypoints">
+          <div class="stat-chip-label">Airspace Nodes</div>
+          <div class="stat-chip-value counter" data-target="20">0</div>
+          <div class="stat-chip-sub">7 Primary Hubs + 13 Waypoints</div>
+        </div>
+        <div class="stat-chip" data-tooltip="Reduced from 13 to 4 peak simultaneous corridor overflows">
+          <div class="stat-chip-label">Congestion Relief</div>
+          <div class="stat-chip-value">-69.2%</div>
+          <div class="stat-chip-sub">13 &rarr; 4 Peak Overflows</div>
+        </div>
+        <div class="stat-chip" data-tooltip="QAOA variational ansatz with p=2 circuit layers">
+          <div class="stat-chip-label">QAOA Solve Time</div>
+          <div class="stat-chip-value">13.5 ms</div>
+          <div class="stat-chip-sub">Variational Ansatz (p=2)</div>
+        </div>
+        <div class="stat-chip" data-tooltip="A320neo, B737-800, A321neo, ATR72-600, B787-9 Dreamliner">
+          <div class="stat-chip-label">Aviation Fleet</div>
+          <div class="stat-chip-value counter" data-target="5">0</div>
+          <div class="stat-chip-sub">A320neo, B737, A321, ATR72, B787</div>
+        </div>
+      </div>
+
+      <a href="#radarSection" class="hero-cta-btn animate-on-scroll">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polygon points="10 8 16 12 10 16 10 8" fill="currentColor"></polygon>
+        </svg>
+        Explore Live Airspace Radar
+      </a>
+    </div>
+  </header>
+
+  <!-- Interactive Dashboard Section -->
+  <main class="container">
+    <section class="dashboard-grid" id="radarSection">
+      
+      <!-- Interactive Radar Canvas Panel -->
+      <div class="glass-panel animate-on-scroll">
+        <div class="panel-header">
+          <div class="panel-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="22" y1="12" x2="18" y2="12"></line>
+              <line x1="6" y1="12" x2="2" y2="12"></line>
+              <line x1="12" y1="6" x2="12" y2="2"></line>
+              <line x1="12" y1="22" x2="12" y2="18"></line>
+            </svg>
+            <span>Live Airspace Trajectory Radar & Bottleneck Tracker</span>
+          </div>
+        </div>
+
+        <div class="radar-container">
+          <canvas id="airspaceCanvas"></canvas>
+
+          <div class="radar-overlay-controls">
+            <div class="radar-mode-selector">
+              <button class="mode-btn active" data-mode="dijkstra" id="modeDijkstra">Dijkstra (Greedy)</button>
+              <button class="mode-btn" data-mode="ilp" id="modeILP">Exact ILP</button>
+              <button class="mode-btn" data-mode="neal" id="modeNeal">Annealer (Neal)</button>
+              <button class="mode-btn" data-mode="qaoa" id="modeQAOA">Qiskit QAOA</button>
+            </div>
+
+            <div class="radar-legend">
+              <div class="legend-item">
+                <span class="legend-dot" style="background:#00f2fe;"></span>
+                <span>Airport Hub</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot" style="background:#9d4edd;"></span>
+                <span>Waypoint</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot" style="background:#ff4d6d;"></span>
+                <span>Bottleneck</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot" style="background:#00f5a0;"></span>
+                <span>Flight</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Controls Panel -->
+      <aside class="glass-panel animate-on-scroll">
+        <div class="panel-header">
+          <div class="panel-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="4" y1="21" x2="4" y2="14"></line>
+              <line x1="4" y1="10" x2="4" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12" y2="3"></line>
+              <line x1="20" y1="21" x2="20" y2="16"></line>
+              <line x1="20" y1="12" x2="20" y2="3"></line>
+            </svg>
+            <span>Simulation Parameters</span>
+          </div>
+        </div>
+
+        <div class="controls-group">
+          <div class="control-label-row">
+            <span>Scheduled Commercial Flights</span>
+            <span class="control-value-badge" id="flightsVal">10</span>
+          </div>
+          <input type="range" id="flightsSlider" min="4" max="10" value="10" step="1">
+        </div>
+
+        <div class="controls-group">
+          <div class="control-label-row">
+            <span>Corridor Safe Capacity Limit</span>
+            <span class="control-value-badge" id="capacityVal">2</span>
+          </div>
+          <input type="range" id="capacitySlider" min="1" max="4" value="2" step="1">
+        </div>
+
+        <div class="control-label-row" style="margin-top:20px; margin-bottom:8px;">
+          <span>Active Optimization Algorithm</span>
+        </div>
+        <div class="solvers-toggle-grid">
+          <div class="solver-choice-card selected" data-solver="dijkstra">
+            <div class="solver-choice-title">Dijkstra Greedy</div>
+            <div class="solver-choice-badge">Uncoordinated (O(F·logV))</div>
+          </div>
+          <div class="solver-choice-card" data-solver="ilp">
+            <div class="solver-choice-title">Exact ILP / HiGHS</div>
+            <div class="solver-choice-badge">Branch-and-Bound</div>
+          </div>
+          <div class="solver-choice-card" data-solver="neal">
+            <div class="solver-choice-title">D-Wave Neal</div>
+            <div class="solver-choice-badge">Simulated Annealer</div>
+          </div>
+          <div class="solver-choice-card" data-solver="qaoa">
+            <div class="solver-choice-title">Qiskit QAOA</div>
+            <div class="solver-choice-badge">Quantum Gate Circuit</div>
+          </div>
+        </div>
+
+        <button class="btn-primary-action" id="runBenchmarkBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          Run Full Benchmark Suite
+        </button>
+      </aside>
+    </section>
+
+    <!-- Real-time Analytics Cards -->
+    <section class="animate-on-scroll">
+      <div style="margin-bottom:12px; display:flex; justify-content:space-between; align-items:flex-end;">
+        <div>
+          <h2 style="font-family:var(--font-heading); font-size:1.6rem; font-weight:700;">Live Execution Telemetry</h2>
+          <p style="color:var(--text-muted); font-size:0.88rem;">Current active solver: <strong id="activeSolverTitle" style="color:#fff;">Dijkstra Greedy Baseline</strong></p>
+        </div>
+      </div>
+
+      <div class="results-cards-grid">
+        <div class="result-card">
+          <div class="result-card-accent accent-blue"></div>
+          <div class="result-card-title">Total Fuel Burn</div>
+          <div class="result-card-val" id="resFuel">70,053.6 kg</div>
+          <div class="result-card-sub">Modeled with wind factors</div>
+        </div>
+
+        <div class="result-card">
+          <div class="result-card-accent accent-green"></div>
+          <div class="result-card-title">Estimated CO₂ Emissions</div>
+          <div class="result-card-val" id="resCO2">221,369.3 kg</div>
+          <div class="result-card-sub">ICAO standard: 3.16 kg CO₂/kg fuel</div>
+        </div>
+
+        <div class="result-card">
+          <div class="result-card-accent accent-crimson"></div>
+          <div class="result-card-title">Corridor Capacity Violations</div>
+          <div class="result-card-val" id="resViolations">13</div>
+          <div class="result-card-sub">Simultaneous bottleneck breaches</div>
+        </div>
+
+        <div class="result-card">
+          <div class="result-card-accent accent-purple"></div>
+          <div class="result-card-title">Solver Execution Time</div>
+          <div class="result-card-val" id="resRuntime">1.0 ms</div>
+          <div class="result-card-sub">Wall-clock solve duration</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Multi-Solver Benchmark Comparison Table -->
+    <section id="benchmarkSection" class="animate-on-scroll">
+      <div style="margin-bottom:16px;">
+        <h2 style="font-family:var(--font-heading); font-size:1.8rem; font-weight:700;">4-Way Head-to-Head Benchmark Suite</h2>
+        <p style="color:var(--text-secondary); font-size:0.95rem;">Benchmarking across Indian Airspace Corridors under identical seed configurations.</p>
+      </div>
+
+      <div class="benchmark-table-container">
+        <table class="benchmark-table">
+          <thead>
+            <tr>
+              <th>Solver Algorithm</th>
+              <th>Total Fuel Burn</th>
+              <th>CO₂ Emissions</th>
+              <th>Airspace Bottlenecks</th>
+              <th>Execution Latency</th>
+              <th>Mathematical Core</th>
+            </tr>
+          </thead>
+          <tbody id="benchmarkTableBody">
+            <!-- Populated dynamically via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- How It Works Pipeline Section -->
+    <section id="pipelineSection" class="pipeline-section animate-on-scroll">
+      <div style="margin-bottom:28px; text-align:center;">
+        <h2 style="font-family:var(--font-heading); font-size:1.8rem; font-weight:700;">How It Works: 5-Layer Optimization Pipeline</h2>
+        <p style="color:var(--text-secondary); font-size:0.95rem; max-width:700px; margin:8px auto 0;">From raw airspace topology to quantum-optimized deconflicted flight schedules.</p>
+      </div>
+
+      <div class="pipeline-grid">
+        <div class="pipeline-step">
+          <div class="pipeline-step-number">01</div>
+          <div class="pipeline-step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3 class="pipeline-step-title">Airspace Graph Generation</h3>
+          <p class="pipeline-step-desc">Model Indian airspace as a weighted graph with 7 airport hubs and 13 waypoint fixes. Edges represent airways with capacity constraints, great-circle distances, and seasonal wind vectors.</p>
+        </div>
+        <div class="pipeline-connector">
+          <svg viewBox="0 0 40 20"><path d="M0 10 L35 10 M30 5 L38 10 L30 15" fill="none" stroke="var(--cyan-glow)" stroke-width="2" opacity="0.5"/></svg>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-step-number">02</div>
+          <div class="pipeline-step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+          </div>
+          <h3 class="pipeline-step-title">Flight Demand Scheduling</h3>
+          <p class="pipeline-step-desc">Generate commercial flights with origin/destination pairs, aircraft types (A320neo, B787-9, etc.), departure time slots, and candidate route trajectories using k-shortest paths.</p>
+        </div>
+        <div class="pipeline-connector">
+          <svg viewBox="0 0 40 20"><path d="M0 10 L35 10 M30 5 L38 10 L30 15" fill="none" stroke="var(--cyan-glow)" stroke-width="2" opacity="0.5"/></svg>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-step-number">03</div>
+          <div class="pipeline-step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg>
+          </div>
+          <h3 class="pipeline-step-title">QUBO Matrix Construction</h3>
+          <p class="pipeline-step-desc">Encode route-selection conflicts as a Quadratic Unconstrained Binary Optimization problem. Auto-calibrate penalty weights to enforce one-hot path selection and corridor capacity limits.</p>
+        </div>
+        <div class="pipeline-connector">
+          <svg viewBox="0 0 40 20"><path d="M0 10 L35 10 M30 5 L38 10 L30 15" fill="none" stroke="var(--cyan-glow)" stroke-width="2" opacity="0.5"/></svg>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-step-number">04</div>
+          <div class="pipeline-step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <h3 class="pipeline-step-title">Multi-Solver Execution</h3>
+          <p class="pipeline-step-desc">Solve using 4 parallel strategies: Dijkstra Greedy baseline, Exact ILP via HiGHS branch-and-bound, D-Wave Neal simulated annealer, and Qiskit QAOA variational quantum circuits.</p>
+        </div>
+        <div class="pipeline-connector">
+          <svg viewBox="0 0 40 20"><path d="M0 10 L35 10 M30 5 L38 10 L30 15" fill="none" stroke="var(--cyan-glow)" stroke-width="2" opacity="0.5"/></svg>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-step-number">05</div>
+          <div class="pipeline-step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+          </div>
+          <h3 class="pipeline-step-title">Benchmark & Dashboard</h3>
+          <p class="pipeline-step-desc">Compare fuel burn, CO₂ emissions, corridor violations, and execution latency. Visualize deconflicted trajectories in real-time on the interactive airspace radar.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual Architecture & Infographics Gallery -->
+    <section id="architectureSection" class="animate-on-scroll">
+      <div style="margin-bottom:20px;">
+        <h2 style="font-family:var(--font-heading); font-size:1.8rem; font-weight:700;">System Architecture & Airspace Topology</h2>
+        <p style="color:var(--text-secondary); font-size:0.95rem;">High-fidelity diagrams illustrating the 5-layer pipeline and the 7-hub coordinate topology.</p>
+      </div>
+
+      <div class="infographics-grid">
+        <div class="infographic-card">
+          <img src="images/indian_airspace_network.jpg" alt="Indian Airspace Network" class="infographic-img" loading="lazy">
+          <div class="infographic-content">
+            <h3 class="infographic-title">Indian Airspace Network (20 Nodes)</h3>
+            <p class="infographic-desc">20 nodes across 7 primary airport hubs and 13 transit fixes. Models great-circle distances, seasonal headwinds, and airway corridors.</p>
+          </div>
+        </div>
+
+        <div class="infographic-card">
+          <img src="images/system_architecture_diagram.jpg" alt="Clean System Architecture Diagram" class="infographic-img" loading="lazy">
+          <div class="infographic-content">
+            <h3 class="infographic-title">Clean 5-Layer System Architecture</h3>
+            <p class="infographic-desc">End-to-end modular pipeline: Data Layer &rarr; QUBO Model Layer &rarr; Solvers (Classical & Quantum) &rarr; Benchmark Layer &rarr; Dashboard.</p>
+          </div>
+        </div>
+
+        <div class="infographic-card">
+          <img src="images/airports_coordinate_graph.jpg" alt="7 Major Airports Airspace Graph" class="infographic-img" loading="lazy">
+          <div class="infographic-content">
+            <h3 class="infographic-title">7 Major Indian Hubs Coordinate Graph</h3>
+            <p class="infographic-desc">Latitude/Longitude geometric mapping of Delhi (DEL), Mumbai (BOM), Hyderabad (HYD), Bengaluru (BLR), Chennai (MAA), Kolkata (CCU), and Vizag (VTZ).</p>
+          </div>
+        </div>
+
+        <div class="infographic-card">
+          <img src="images/benchmark_fuel_comparison.jpg" alt="Benchmark Fuel Comparison" class="infographic-img" loading="lazy">
+          <div class="infographic-content">
+            <h3 class="infographic-title">Fuel Burn & Deconfliction Comparison</h3>
+            <p class="infographic-desc">Comparative analysis across Dijkstra Baseline, Exact ILP, D-Wave Neal simulated annealer, and Qiskit QAOA quantum circuits.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Environmental Sustainability Section -->
+    <section id="sustainabilitySection" class="animate-on-scroll">
+      <div style="margin-bottom:20px;">
+        <h2 style="font-family:var(--font-heading); font-size:1.8rem; font-weight:700;">Environmental Sustainability & Carbon Mitigation</h2>
+        <p style="color:var(--text-secondary); font-size:0.95rem;">Quantifying real-world fuel reduction and environmental tree absorption equivalents.</p>
+      </div>
+
+      <div class="sustainability-grid">
+        <div class="infographic-card sustainability-hero-card">
+          <img src="images/co2_reduction_impact.jpg" alt="CO2 Reduction Impact" class="infographic-img" style="height:420px; object-fit:contain; background:#07101e;" loading="lazy">
+          <div class="infographic-content">
+            <h3 class="infographic-title">Aviation Carbon Footprint Mitigation Model</h3>
+            <p class="infographic-desc">By eliminating holding patterns and detour delays caused by airway congestion, AeroQ-Route saves an estimated 80 L of fuel per flight operation, reducing 200 kg of CO₂ per route, equivalent to carbon absorbed by 4 mature trees annually.</p>
+          </div>
+        </div>
+
+        <div class="sustainability-stats">
+          <div class="eco-stat-card">
+            <div class="eco-stat-icon">🌿</div>
+            <div class="eco-stat-value">80 L</div>
+            <div class="eco-stat-label">Fuel Saved per Flight</div>
+          </div>
+          <div class="eco-stat-card">
+            <div class="eco-stat-icon">🌍</div>
+            <div class="eco-stat-value">200 kg</div>
+            <div class="eco-stat-label">CO₂ Reduced per Route</div>
+          </div>
+          <div class="eco-stat-card">
+            <div class="eco-stat-icon">🌳</div>
+            <div class="eco-stat-value">4 Trees</div>
+            <div class="eco-stat-label">Annual Carbon Equivalent</div>
+          </div>
+          <div class="eco-stat-card">
+            <div class="eco-stat-icon">⚡</div>
+            <div class="eco-stat-value">69.2%</div>
+            <div class="eco-stat-label">Congestion Reduction</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Flight Trajectory Schedule Inspector -->
+    <section id="scheduleSection" class="animate-on-scroll">
+      <div style="margin-bottom:16px;">
+        <h2 style="font-family:var(--font-heading); font-size:1.8rem; font-weight:700;">Commercial Flight Trajectory Inspector</h2>
+        <p style="color:var(--text-secondary); font-size:0.95rem;">Active commercial flights scheduled across Indian city pairs with allocated aircraft models.</p>
+      </div>
+
+      <div class="benchmark-table-container">
+        <table class="benchmark-table">
+          <thead>
+            <tr>
+              <th>Flight ID</th>
+              <th>Origin &rarr; Destination</th>
+              <th>Aircraft Model</th>
+              <th>Departure Slot</th>
+              <th>Default Route Waypoints</th>
+            </tr>
+          </thead>
+          <tbody id="flightsTableBody">
+            <!-- Populated dynamically via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Mathematical Formulations Section -->
+    <section id="mathSection" style="margin-bottom:60px;" class="animate-on-scroll">
+      <div style="margin-bottom:20px;">
+        <h2 style="font-family:var(--font-heading); font-size:1.8rem; font-weight:700;">Mathematical Models & QUBO Formulation</h2>
+        <p style="color:var(--text-secondary); font-size:0.95rem;">Formal mathematical definitions powering the quantum and classical solvers.</p>
+      </div>
+
+      <div class="math-card">
+        <h3 style="color:#fff; font-size:1.1rem; margin-bottom:6px;">1. Compact Route-Selection Conflict QUBO</h3>
+        <p style="color:var(--text-secondary); font-size:0.9rem;">Minimizing quadratic binary polynomials with decision variables y_{f, k} &in; {0, 1}:</p>
+        <div class="math-formula">
+          H(y) = &sum;_{f, k} Fuel(p_{f, k}) &middot; y_{f, k} + P_{one} &sum;_f (&sum;_k y_{f, k} - 1)&sup2; + P_{conflict} &sum;_{conflicts} y_{f1, k1} &middot; y_{f2, k2}
+        </div>
+      </div>
+
+      <div class="math-card">
+        <h3 style="color:#fff; font-size:1.1rem; margin-bottom:6px;">2. Quantum Mapping (Ising Spin Glass Transformation)</h3>
+        <p style="color:var(--text-secondary); font-size:0.9rem;">Translating binary decision variables to Pauli-Z spin operators &sigma;^z &in; {-1, +1}:</p>
+        <div class="math-formula">
+          x_i = (1 - &sigma;_i^z) / 2  &implies;  H_{Ising} = &sum;_i h_i &sigma;_i^z + &sum;_{i < j} J_{ij} &sigma;_i^z &sigma;_j^z + offset
+        </div>
+      </div>
+
+      <div class="math-card">
+        <h3 style="color:#fff; font-size:1.1rem; margin-bottom:6px;">3. Dynamic Penalty Auto-Calibration Rule</h3>
+        <p style="color:var(--text-secondary); font-size:0.9rem;">Guaranteeing that hard constraints dominate flight fuel burn to prevent trivial all-zero unconstrained ground states:</p>
+        <div class="math-formula">
+          P_{one}^{effective} = max(P_{one}, 1.5 &times; max_{f, k}(Fuel(p_{f, k})))
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-brand">
+        <div class="brand-icon" style="width:32px; height:32px;">
+          <svg viewBox="0 0 24 24" style="width:18px; height:18px;">
+            <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+          </svg>
+        </div>
+        <span class="brand-title" style="font-size:1.2rem;">AeroQ-Route</span>
+      </div>
+
+      <div class="footer-links">
+        <a href="#radarSection">Live Radar</a>
+        <a href="#benchmarkSection">Benchmarks</a>
+        <a href="#pipelineSection">Pipeline</a>
+        <a href="#architectureSection">Architecture</a>
+        <a href="#sustainabilitySection">CO₂ Emissions</a>
+        <a href="#mathSection">Formulations</a>
+      </div>
+
+      <div class="footer-tech-stack">
+        <span class="tech-pill">HTML5</span>
+        <span class="tech-pill">CSS3</span>
+        <span class="tech-pill">JavaScript</span>
+        <span class="tech-pill">Python</span>
+        <span class="tech-pill">PuLP / HiGHS</span>
+        <span class="tech-pill">D-Wave Neal</span>
+        <span class="tech-pill">Qiskit QAOA</span>
+        <span class="tech-pill">NetworkX</span>
+      </div>
+
+      <p>AeroQ-Route &copy; 2026. Quantum-Assisted Air Traffic Deconfliction & Fuel Optimization System.</p>
+      <p style="margin-top:6px; font-size:0.8rem; color:#475569;">Modeled on the Indian Airspace Corridor Network &bull; Built with ❤️ for Sustainable Aviation</p>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTopBtn" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+
+  <!-- Scripts -->
+  <script src="js/airspace_data.js"></script>
+  <script src="js/simulation.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
