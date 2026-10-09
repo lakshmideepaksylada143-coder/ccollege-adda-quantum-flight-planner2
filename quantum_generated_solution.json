@@ -1,42 +1,81 @@
 {
-  "meta": {
-    "title": "Quantum Generated Computation & Flight Optimization Report",
-    "generator": "AeroQ-Route Quantum Engine (Qiskit 2.x + D-Wave Neal)",
-    "timestamp": "2026-10-09T14:45:53.429541",
+  "metadata": {
+    "title": "AeroQ-Route Pure Quantum Computation Benchmark",
+    "timestamp": "2026-10-09T15:05:39.202421",
+    "num_qubits": 20,
+    "airspace_corridors_modeled": 49,
+    "scheduled_flights": 10,
     "status": "SUCCESS"
   },
-  "quantum_arithmetic": {
-    "inputs": {
-      "A": 444,
-      "B": 666,
-      "C": 111
+  "gate_based_qaoa": {
+    "quantum_circuit": {
+      "solver_type": "Gate-Based QAOA",
+      "backend": "Qiskit AerSimulator",
+      "num_qubits": 20,
+      "circuit_depth": 38,
+      "total_quantum_gates": 228,
+      "gate_breakdown": {
+        "rzz": 108,
+        "rz": 40,
+        "rx": 40,
+        "h": 20,
+        "measure": 20
+      },
+      "variational_layers": 2,
+      "shots": 1024,
+      "unique_measured_states": 988,
+      "top_measured_state": "00110000000000110000",
+      "top_state_count": 3,
+      "fidelity_pct": 0.29,
+      "ground_energy": -69233.323,
+      "optimal_bitstring": [
+        0,
+        1,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1
+      ],
+      "runtime_seconds": 0.1007
     },
-    "qubo_optimization": {
-      "formula": "444 + 666 - 111",
-      "target": 999,
-      "quantum_computed_value": 999,
-      "is_exact_ground_state": true,
-      "qubo_ground_energy": 0.0,
-      "qubits_used": 11,
-      "binary_spin_state": "01111100111",
-      "num_reads": 150
+    "airspace_evaluation": {
+      "total_fuel_kg": 73111.5,
+      "total_co2_kg": 231032.3,
+      "capacity_violations": 7,
+      "corridor_usage": {
+        "DEL<->WP1": 1,
+        "JAI<->WP1": 1,
+        "BHO<->JAI": 4,
+        "BHO<->BOM": 3,
+        "DEL<->JAI": 3,
+        "DEL<->LKO": 2,
+        "LKO<->WP5": 2,
+        "NAG<->WP5": 1,
+        "HYD<->NAG": 3,
+        "BLR<->HYD": 3,
+        "BHO<->NAG": 3,
+        "BOM<->HYD": 2,
+        "HYD<->MAA": 1,
+        "CCU<->WP5": 1,
+        "NAG<->WP2": 1,
+        "CCU<->WP2": 1
+      }
     },
-    "qiskit_circuit_simulation": {
-      "circuit_qubits": 10,
-      "quantum_gate_depth": 2,
-      "measured_state": "1111100111",
-      "measured_integer": 999,
-      "measurement_fidelity": "100.0%",
-      "total_shots": 1024
-    }
-  },
-  "quantum_flight_optimization": {
-    "solver": "Sim Annealer (Neal)",
-    "total_fuel_kg": 75289.6,
-    "co2_emissions_kg": 237915.2,
-    "capacity_violations": 10,
-    "runtime_seconds": 0.0932,
-    "assigned_flight_routes": {
+    "flight_assignments": {
       "F0": [
         "DEL",
         "WP1",
@@ -52,8 +91,8 @@
       ],
       "F2": [
         "DEL",
-        "JAI",
-        "BHO",
+        "LKO",
+        "WP5",
         "NAG",
         "HYD",
         "BLR"
@@ -64,6 +103,129 @@
         "NAG",
         "BHO",
         "JAI",
+        "DEL"
+      ],
+      "F4": [
+        "BOM",
+        "HYD"
+      ],
+      "F5": [
+        "HYD",
+        "BOM"
+      ],
+      "F6": [
+        "DEL",
+        "JAI",
+        "BHO",
+        "NAG",
+        "HYD",
+        "MAA"
+      ],
+      "F7": [
+        "CCU",
+        "WP5",
+        "LKO",
+        "DEL"
+      ],
+      "F8": [
+        "BLR",
+        "HYD"
+      ],
+      "F9": [
+        "BOM",
+        "BHO",
+        "NAG",
+        "WP2",
+        "CCU"
+      ]
+    }
+  },
+  "quantum_annealer": {
+    "annealing_parameters": {
+      "solver_type": "Quantum Annealer",
+      "backend": "D-Wave Neal (Transverse-Field Annealing Emulation)",
+      "qubits_used": 20,
+      "num_reads": 150,
+      "num_sweeps": 400,
+      "ground_energy": -153573.4397,
+      "optimal_bitstring": [
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0
+      ],
+      "runtime_seconds": 0.0212
+    },
+    "airspace_evaluation": {
+      "total_fuel_kg": 76426.6,
+      "total_co2_kg": 241507.9,
+      "capacity_violations": 5,
+      "corridor_usage": {
+        "DEL<->JAI": 3,
+        "BHO<->JAI": 4,
+        "BHO<->BOM": 2,
+        "JAI<->WP1": 1,
+        "DEL<->WP1": 1,
+        "BHO<->NAG": 2,
+        "HYD<->NAG": 3,
+        "BLR<->HYD": 3,
+        "NAG<->WP5": 1,
+        "LKO<->WP5": 2,
+        "DEL<->LKO": 2,
+        "BOM<->WP3": 1,
+        "HYD<->WP3": 1,
+        "BOM<->HYD": 2,
+        "NAG<->VTZ": 1,
+        "MAA<->VTZ": 1,
+        "CCU<->WP5": 1,
+        "NAG<->WP2": 1,
+        "CCU<->WP2": 1
+      }
+    },
+    "flight_assignments": {
+      "F0": [
+        "DEL",
+        "JAI",
+        "BHO",
+        "BOM"
+      ],
+      "F1": [
+        "BOM",
+        "BHO",
+        "JAI",
+        "WP1",
+        "DEL"
+      ],
+      "F2": [
+        "DEL",
+        "JAI",
+        "BHO",
+        "NAG",
+        "HYD",
+        "BLR"
+      ],
+      "F3": [
+        "BLR",
+        "HYD",
+        "NAG",
+        "WP5",
+        "LKO",
         "DEL"
       ],
       "F4": [
@@ -100,15 +262,6 @@
         "WP2",
         "CCU"
       ]
-    },
-    "quantum_details": {
-      "qubo_energy": -83191.79,
-      "qubo_variables": 20,
-      "conflicts_modeled": 44,
-      "num_reads": 100,
-      "num_sweeps": 500,
-      "samples_evaluated": 25,
-      "method": "D-Wave Neal BQM Metropolis-Hastings Sampling"
     }
   }
 }

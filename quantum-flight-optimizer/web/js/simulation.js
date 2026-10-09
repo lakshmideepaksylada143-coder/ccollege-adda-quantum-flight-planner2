@@ -4,21 +4,23 @@
 
 class AeroSimulator {
   constructor() {
-    this.flights = window.AeroData.sampleFlights;
-    this.airports = window.AeroData.airports;
-    this.waypoints = window.AeroData.waypoints;
-    this.aircraft = window.AeroData.aircraft;
+    const data = window.AeroData || {};
+    this.flights = data.sampleFlights || [];
+    this.airports = data.airports || {};
+    this.waypoints = data.waypoints || {};
+    this.aircraft = data.aircraft || {};
   }
 
   // Calculate fuel burn for a path (in kg)
   calculatePathFuel(path, fuelRate) {
     if (!path || path.length < 2) return 0;
+    const distFn = (window.AeroData && window.AeroData.haversineDist) ? window.AeroData.haversineDist : haversineDist;
     let totalFuel = 0;
     for (let i = 0; i < path.length - 1; i++) {
       const u = this.getNodeCoord(path[i]);
       const v = this.getNodeCoord(path[i + 1]);
-      if (u && v) {
-        const dist = window.AeroData.haversineDist(u.lon, u.lat, v.lon, v.lat);
+      if (u && v && typeof distFn === "function") {
+        const dist = distFn(u.lon, u.lat, v.lon, v.lat);
         const wind = 1.05; // Average Indian monsoon / seasonal wind vector
         totalFuel += dist * fuelRate * wind;
       }
@@ -27,8 +29,8 @@ class AeroSimulator {
   }
 
   getNodeCoord(id) {
-    if (this.airports[id]) return this.airports[id];
-    if (this.waypoints[id]) return this.waypoints[id];
+    if (this.airports && this.airports[id]) return this.airports[id];
+    if (this.waypoints && this.waypoints[id]) return this.waypoints[id];
     return null;
   }
 

@@ -255,16 +255,21 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentSolution = null;
 
   function updateSolution() {
-    if (currentMode === "dijkstra") {
-      currentSolution = window.AeroSimulator.solveDijkstra(flightCount);
-    } else if (currentMode === "ilp") {
-      currentSolution = window.AeroSimulator.solveExactILP(flightCount, capacityLimit);
-    } else if (currentMode === "neal") {
-      currentSolution = window.AeroSimulator.solveAnnealer(flightCount, capacityLimit);
-    } else {
-      currentSolution = window.AeroSimulator.solveQAOA(flightCount, capacityLimit);
+    if (!window.AeroSimulator) return;
+    try {
+      if (currentMode === "dijkstra") {
+        currentSolution = window.AeroSimulator.solveDijkstra(flightCount);
+      } else if (currentMode === "ilp") {
+        currentSolution = window.AeroSimulator.solveExactILP(flightCount, capacityLimit);
+      } else if (currentMode === "neal") {
+        currentSolution = window.AeroSimulator.solveAnnealer(flightCount, capacityLimit);
+      } else {
+        currentSolution = window.AeroSimulator.solveQAOA(flightCount, capacityLimit);
+      }
+      updateMetricsDisplay(currentSolution);
+    } catch (e) {
+      console.warn("AeroQ updateSolution error:", e);
     }
-    updateMetricsDisplay(currentSolution);
   }
 
   // Coordinate projection bounds for Indian subcontinent
@@ -272,17 +277,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const LAT_MIN = 7.0, LAT_MAX = 33.0;
 
   function resizeCanvas() {
-    const rect = canvas.parentElement.getBoundingClientRect();
-    canvas.width = rect.width * window.devicePixelRatio;
-    canvas.height = rect.height * window.devicePixelRatio;
-    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    const parent = canvas.parentElement;
+    const rect = parent ? parent.getBoundingClientRect() : { width: 600, height: 500 };
+    const w = Math.max(rect.width || 600, 300);
+    const h = Math.max(rect.height || 500, 300);
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
   }
   window.addEventListener("resize", resizeCanvas);
   resizeCanvas();
 
   function project(lon, lat) {
-    const w = canvas.width / window.devicePixelRatio;
-    const h = canvas.height / window.devicePixelRatio;
+    const dpr = window.devicePixelRatio || 1;
+    const w = (canvas.width / dpr) || 600;
+    const h = (canvas.height / dpr) || 500;
     const x = ((lon - LON_MIN) / (LON_MAX - LON_MIN)) * (w * 0.85) + (w * 0.08);
     // Invert lat for canvas Y
     const y = (1.0 - (lat - LAT_MIN) / (LAT_MAX - LAT_MIN)) * (h * 0.85) + (h * 0.08);
@@ -476,7 +487,9 @@ document.addEventListener("DOMContentLoaded", () => {
       updateSolution();
     }
 
-    drawRoutes(currentSolution.assignments, currentSolution.edgeUsage);
+    if (currentSolution && currentSolution.assignments) {
+      drawRoutes(currentSolution.assignments, currentSolution.edgeUsage || {});
+    }
     drawNodes();
 
     planeProgress = (planeProgress + 0.0035) % 1.0;
